@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elena &amp; Bogdan — Wedding 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:       #D4812A;
+      --orange-rich:  #C06A18;
+      --orange-deep:  #A05510;
+      --orange-light: #E8A54A;
+      --orange-pale:  #F5C882;
+      --orange-glow:  #F7D8A0;
+      --tangerine:    #E8783A;
+      --leaf:         #5A7A38;
+      --leaf-dark:    #3D5A22;
+      --leaf-mid:     #6E8E48;
+      --leaf-light:   #8AAE5A;
+      --leaf-pale:    #B0D080;
+      --bark:         #6A4A28;
+      --bark-light:   #8A6A3A;
+      --cream:        #FFFCF6;
+      --cream-warm:   #FDF6EC;
+      --cream-peach:  #FFF2E2;
+      --cream-deep:   #F5E8D4;
+      --text:         #3A2E20;
+      --text-mid:     #5A4A38;
+      --text-light:   #8A7A62;
+      --text-muted:   #A89A80;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── Reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Section shared ── */
+    .section-label {
+      font-size: 0.57rem;
+      letter-spacing: 0.52em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+    .section-rule {
+      width: 28px;
+      height: 1.5px;
+      background: var(--orange);
+      opacity: 0.5;
+      margin: 0 auto 42px;
+    }
+
+    /* Ornate gold gradient divider line used between sections */
+    .section-border {
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--orange-pale), var(--orange-light), var(--orange-pale), transparent);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════ */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 32px 110px;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 70%, rgba(212,129,42,0.05) 0%, transparent 60%),
+        var(--cream);
+    }
+
+    /* Giant watermark oranges */
+    .hero-watermark {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.035;
+    }
+    .hero-watermark.wm-tl { top: -80px; left: -110px; transform: rotate(-12deg); }
+    .hero-watermark.wm-br { bottom: -100px; right: -90px; transform: rotate(22deg); }
+
+    /* Inner gold-ish frame */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(212,129,42,0.12);
+      pointer-events: none;
+    }
+
+    /* Corner ornaments */
+    .corner-orn {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      opacity: 0.5;
+    }
+    .corner-orn.tl { top: 14px;    left: 14px;  }
+    .corner-orn.tr { top: 14px;    right: 14px; transform: scaleX(-1); }
+    .corner-orn.bl { bottom: 14px; left: 14px;  transform: scaleY(-1); }
+    .corner-orn.br { bottom: 14px; right: 14px; transform: scale(-1); }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    /* Top orange blossom wreath */
+    .hero-wreath {
+      display: block;
+      margin: 0 auto 24px;
+      opacity: 0;
+      animation: fadeUp 1.2s ease forwards 0.3s;
+    }
+
+    .hero-label {
+      font-size: 0.58rem;
+      letter-spacing: 0.52em;
+      text-transform: uppercase;
+      color: var(--orange);
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.7s;
+      margin-bottom: 18px;
+    }
+
+    .hero-names {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.8rem, 12vw, 9rem);
+      font-weight: 400;
+      line-height: 0.92;
+      color: var(--text);
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.9s;
+    }
+    .hero-names .amp {
+      display: block;
+      font-style: italic;
+      font-size: 0.48em;
+      color: var(--orange);
+      margin: 8px 0 4px;
+    }
+
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 28px 0 18px;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.1s;
+    }
+    .hero-divider::before,
+    .hero-divider::after {
+      content: '';
+      width: 54px;
+      height: 1px;
+      background: var(--orange-pale);
+    }
+
+    .hero-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.45rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text-mid);
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.2s;
+      margin-bottom: 8px;
+    }
+    .hero-location {
+      font-size: 0.58rem;
+      letter-spacing: 0.46em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.4s;
+    }
+
+    /* Bottom wreath mirrored */
+    .hero-wreath-bottom {
+      display: block;
+      margin: 32px auto 0;
+      transform: scaleY(-1);
+      opacity: 0;
+      animation: fadeUp 1.2s ease forwards 1.5s;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 2s;
+    }
+    .hero-scroll span {
+      font-size: 0.52rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--orange-pale);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--orange-pale), transparent);
+      animation: scrollPulse 2.6s ease-in-out infinite;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       INVITATION TEXT
+    ═══════════════════════════════════════════════════ */
+    .invite-section {
+      padding: 96px 32px;
+      text-align: center;
+      background: var(--cream-warm);
+      position: relative;
+    }
+    .invite-wrap { max-width: 640px; margin: 0 auto; }
+
+    .invite-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 2.1;
+      color: var(--text-mid);
+      margin-top: 36px;
+    }
+    .invite-text strong {
+      font-weight: 600;
+      font-style: normal;
+      color: var(--text);
+    }
+    .invite-names-block {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 400;
+      color: var(--orange-rich);
+      margin: 30px 0;
+      line-height: 1.2;
+    }
+    .invite-names-block .amp-sm {
+      font-style: italic;
+      color: var(--orange);
+      font-size: 0.85em;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       ORANGE GROVE SCHEDULE
+    ═══════════════════════════════════════════════════ */
+    .schedule-section {
+      position: relative;
+      padding: 90px 0 110px;
+      background:
+        radial-gradient(ellipse at 50% 80%, rgba(212,129,42,0.04) 0%, transparent 55%),
+        var(--cream);
+      overflow: hidden;
+    }
+
+    /* Leaf rain container */
+    #leaf-rain {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 4;
+    }
+    .falling-leaf {
+      position: absolute;
+      top: -48px;
+      pointer-events: none;
+      will-change: transform, opacity;
+      animation: leafFall linear forwards;
+    }
+    @keyframes leafFall {
+      0%   { transform: translateY(0)     rotate(0deg)   translateX(0);    opacity: 0; }
+      5%   {                                                                opacity: 0.9; }
+      28%  { transform: translateY(28vh)  rotate(100deg) translateX(30px);             }
+      52%  { transform: translateY(52vh)  rotate(195deg) translateX(-22px);            }
+      78%  { transform: translateY(78vh)  rotate(290deg) translateX(18px);             }
+      93%  {                                                                opacity: 0.6; }
+      100% { transform: translateY(112vh) rotate(370deg) translateX(-6px);  opacity: 0; }
+    }
+
+    /* Orange blossom petals animation */
+    .falling-petal {
+      position: absolute;
+      top: -30px;
+      pointer-events: none;
+      will-change: transform, opacity;
+      animation: petalFall linear forwards;
+    }
+    @keyframes petalFall {
+      0%   { transform: translateY(0)     rotate(0deg)   translateX(0);    opacity: 0; }
+      6%   {                                                                opacity: 1; }
+      32%  { transform: translateY(30vh)  rotate(130deg) translateX(-20px);            }
+      60%  { transform: translateY(58vh)  rotate(240deg) translateX(25px);             }
+      90%  {                                                                opacity: 0.5; }
+      100% { transform: translateY(110vh) rotate(360deg) translateX(-8px);  opacity: 0; }
+    }
+
+    .sch-heading {
+      text-align: center;
+      padding: 0 32px 64px;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Grid layout: left events | center oranges | right events */
+    .grove-layout {
+      display: grid;
+      grid-template-columns: 1fr 200px 1fr;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Center vine SVG */
+    .vine-col { position: relative; }
+    .vine-col svg { width: 100%; display: block; }
+
+    /* Event columns */
+    .events-col {
+      display: flex;
+      flex-direction: column;
+    }
+    .events-col.left  { padding-right: 20px; align-items: flex-end;   }
+    .events-col.right { padding-left: 20px;  align-items: flex-start; }
+
+    .event-card {
+      position: relative;
+      padding: 18px 22px;
+      margin-bottom: 50px;
+      border-radius: 6px;
+      background: rgba(255,252,246,0.92);
+      border: 1px solid rgba(212,129,42,0.15);
+      box-shadow: 0 4px 20px rgba(212,129,42,0.06);
+      backdrop-filter: blur(6px);
+      max-width: 280px;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .event-card.visible { opacity: 1; transform: translateY(0); }
+
+    .events-col.left  .event-card { text-align: right; }
+    .events-col.right .event-card { text-align: left;  }
+
+    /* Small orange circle decoration on card edge */
+    .event-card::before {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, var(--orange-light), var(--orange));
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 0 6px rgba(212,129,42,0.3);
+    }
+    .events-col.left  .event-card::before { right: -22px; }
+    .events-col.right .event-card::before { left: -22px;  }
+
+    /* Connector line from card to vine */
+    .event-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 12px;
+      height: 1px;
+      background: var(--orange-pale);
+    }
+    .events-col.left  .event-card::after { right: -12px; }
+    .events-col.right .event-card::after { left: -12px;  }
+
+    .event-time {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3.2vw, 2rem);
+      font-weight: 400;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .event-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.88rem, 1.7vw, 1.05rem);
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 5px;
+      letter-spacing: 0.02em;
+    }
+    .event-desc {
+      font-size: 0.61rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      line-height: 1.65;
+      margin-top: 4px;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       ORANGE DETAILS CARDS
+    ═══════════════════════════════════════════════════ */
+    .details-section {
+      padding: 96px 32px;
+      background: var(--cream-peach);
+      text-align: center;
+      position: relative;
+    }
+    .details-grid {
+      max-width: 880px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 52px;
+    }
+    .detail-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px;
+      background: rgba(255,252,246,0.7);
+      border: 1px solid rgba(212,129,42,0.12);
+      border-radius: 8px;
+      box-shadow: 0 6px 28px rgba(212,129,42,0.06);
+    }
+    .detail-icon { width: 48px; height: 48px; margin-bottom: 20px; }
+    .detail-label {
+      font-size: 0.56rem;
+      letter-spacing: 0.46em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 9px;
+    }
+    .detail-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .detail-value small {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.92rem;
+      font-style: italic;
+      color: var(--text-light);
+      margin-top: 3px;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       CLOSING
+    ═══════════════════════════════════════════════════ */
+    .closing-section {
+      padding: 106px 32px;
+      text-align: center;
+      background: var(--cream);
+      position: relative;
+    }
+    .closing-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.15rem, 3vw, 1.85rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text-mid);
+      max-width: 580px;
+      margin: 40px auto;
+      line-height: 1.95;
+    }
+    .closing-rule {
+      width: 24px;
+      height: 1.5px;
+      background: var(--orange);
+      opacity: 0.45;
+      margin: 36px auto;
+    }
+    .closing-names {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 400;
+      color: var(--text);
+    }
+    .closing-names .amp { font-style: italic; color: var(--orange); }
+
+    /* ═══════════════════════════════════════════════════
+       RSVP
+    ═══════════════════════════════════════════════════ */
+    .rsvp-section {
+      padding: 96px 32px;
+      background: var(--cream-warm);
+    }
+    .rsvp-wrap { max-width: 540px; margin: 0 auto; text-align: center; }
+    .rsvp-form { text-align: left; margin-top: 44px; }
+
+    .form-group { margin-bottom: 26px; }
+    .form-group > label:first-child {
+      display: block;
+      font-size: 0.61rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"] {
+      width: 100%;
+      padding: 13px 16px;
+      background: var(--cream);
+      border: 1px solid rgba(212,129,42,0.2);
+      border-radius: 3px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.25s;
+    }
+    .form-group input::placeholder { color: var(--text-muted); opacity: 0.6; }
+    .form-group input:focus { border-color: var(--orange); }
+
+    .attend-toggle { display: flex; gap: 10px; }
+    .attend-toggle input { display: none; }
+    .attend-toggle label {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid rgba(212,129,42,0.2);
+      border-radius: 3px;
+      text-align: center;
+      cursor: pointer;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      color: var(--text-light);
+      transition: all 0.25s;
+      user-select: none;
+    }
+    .attend-toggle input:checked + label {
+      border-color: var(--orange);
+      background: rgba(212,129,42,0.06);
+      color: var(--text);
+    }
+
+    .conditional-fields {
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.55s ease, opacity 0.45s ease;
+    }
+    .conditional-fields.visible { max-height: 900px; opacity: 1; }
+
+    .num-stepper {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(212,129,42,0.2);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .num-btn {
+      width: 42px; height: 42px;
+      border: none;
+      background: var(--cream);
+      color: var(--orange);
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .num-btn:hover { background: var(--cream-peach); }
+    .num-display {
+      width: 50px;
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--text);
+      border-left: 1px solid rgba(212,129,42,0.2);
+      border-right: 1px solid rgba(212,129,42,0.2);
+      padding: 4px 0;
+    }
+
+    .check-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .check-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      color: var(--text-light);
+      padding: 10px 12px;
+      border: 1px solid rgba(212,129,42,0.14);
+      border-radius: 3px;
+      transition: all 0.2s;
+      user-select: none;
+    }
+    .check-option:hover { border-color: var(--orange); }
+    .check-option input { display: none; }
+    .check-box {
+      width: 14px; height: 14px;
+      border: 1px solid rgba(212,129,42,0.3);
+      border-radius: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      transition: all 0.2s;
+    }
+    .check-option input:checked ~ .check-box {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: #fff;
+    }
+    .check-option input:checked ~ span { color: var(--text); }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: var(--orange);
+      color: var(--cream);
+      border: none;
+      border-radius: 3px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.63rem;
+      font-weight: 400;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.25s, box-shadow 0.25s, transform 0.15s;
+      margin-top: 8px;
+    }
+    .submit-btn:hover  { background: var(--orange-rich); box-shadow: 0 4px 18px rgba(212,129,42,0.25); }
+    .submit-btn:active { transform: scale(0.99); }
+    .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .rsvp-success {
+      display: none;
+      text-align: center;
+      padding: 44px 0;
+      animation: fadeUp 0.7s ease;
+    }
+    .rsvp-success.show { display: block; }
+    .rsvp-success h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--text);
+      margin: 20px 0 10px;
+    }
+    .rsvp-success p { font-size: 0.84rem; color: var(--text-light); }
+
+    /* ═══════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════ */
+    footer {
+      background: var(--cream-deep);
+      border-top: 1px solid rgba(212,129,42,0.12);
+      padding: 30px 24px;
+      text-align: center;
+      font-size: 0.57rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ─── KEYFRAMES ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.8; }
+      50%       { opacity: 0.12; }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 640px) {
+      .grove-layout {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+      }
+      .vine-col { display: none; }
+      .events-col { padding: 0 !important; align-items: stretch !important; }
+      .event-card {
+        text-align: left !important;
+        max-width: 100%;
+        margin-left: 16px;
+      }
+      .event-card::before { left: -22px !important; right: auto !important; }
+      .event-card::after  { left: -12px !important; right: auto !important; }
+      .events-col.left .event-card { text-align: left; }
+      .events-col.left {
+        border-left: 1px solid var(--orange-pale);
+        padding-left: 18px !important;
+      }
+      .events-col.right {
+        border-left: 1px solid var(--orange-pale);
+        padding-left: 18px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ──────────────────────────────────────────── -->
+  <section class="hero">
+
+    <!-- Watermark oranges -->
+    <svg class="hero-watermark wm-tl" width="420" height="420" viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="90" fill="#D4812A"/>
+      <path d="M100 8 C 96 16, 88 22, 95 12 C 98 6, 102 6, 105 12 C 112 22, 104 16, 100 8Z" fill="#5A7A38"/>
+    </svg>
+    <svg class="hero-watermark wm-br" width="360" height="360" viewBox="0 0 200 200" aria-hidden="true">
+      <circle cx="100" cy="100" r="85" fill="#D4812A"/>
+    </svg>
+
+    <!-- Corner ornaments: orange blossom branch -->
+    <svg class="corner-orn tl" viewBox="0 0 90 90" fill="none" aria-hidden="true">
+      <path d="M2 88 L2 2 L88 2" stroke="rgba(212,129,42,0.5)" stroke-width="1.2" fill="none"/>
+      <!-- Branch with leaves -->
+      <path d="M2 2 C 12 12, 24 18, 36 22" stroke="rgba(90,122,56,0.5)" stroke-width="1" fill="none" stroke-linecap="round"/>
+      <ellipse cx="26" cy="14" rx="6" ry="3" fill="rgba(90,122,56,0.4)" transform="rotate(-30,26,14)"/>
+      <ellipse cx="36" cy="22" rx="5" ry="2.5" fill="rgba(90,122,56,0.3)" transform="rotate(-15,36,22)"/>
+      <!-- Tiny orange -->
+      <circle cx="8" cy="8" r="4" fill="rgba(212,129,42,0.35)"/>
+      <!-- Blossom -->
+      <circle cx="38" cy="22" r="3" fill="rgba(255,255,255,0.25)" stroke="rgba(212,129,42,0.35)" stroke-width="0.6"/>
+    </svg>
+    <svg class="corner-orn tr" viewBox="0 0 90 90" fill="none" aria-hidden="true">
+      <path d="M2 88 L2 2 L88 2" stroke="rgba(212,129,42,0.5)" stroke-width="1.2" fill="none"/>
+      <path d="M2 2 C 12 12, 24 18, 36 22" stroke="rgba(90,122,56,0.5)" stroke-width="1" fill="none" stroke-linecap="round"/>
+      <ellipse cx="26" cy="14" rx="6" ry="3" fill="rgba(90,122,56,0.4)" transform="rotate(-30,26,14)"/>
+      <ellipse cx="36" cy="22" rx="5" ry="2.5" fill="rgba(90,122,56,0.3)" transform="rotate(-15,36,22)"/>
+      <circle cx="8" cy="8" r="4" fill="rgba(212,129,42,0.35)"/>
+    </svg>
+    <svg class="corner-orn bl" viewBox="0 0 90 90" fill="none" aria-hidden="true">
+      <path d="M2 88 L2 2 L88 2" stroke="rgba(212,129,42,0.5)" stroke-width="1.2" fill="none"/>
+      <circle cx="8" cy="8" r="4" fill="rgba(212,129,42,0.35)"/>
+    </svg>
+    <svg class="corner-orn br" viewBox="0 0 90 90" fill="none" aria-hidden="true">
+      <path d="M2 88 L2 2 L88 2" stroke="rgba(212,129,42,0.5)" stroke-width="1.2" fill="none"/>
+      <circle cx="8" cy="8" r="4" fill="rgba(212,129,42,0.35)"/>
+    </svg>
+
+    <div class="hero-content">
+
+      <!-- Orange blossom wreath top -->
+      <svg class="hero-wreath" width="220" height="72" viewBox="0 0 220 72" fill="none" aria-hidden="true">
+        <!-- Left branch -->
+        <path d="M110 68 C100 52, 82 38, 60 26 C44 18, 26 14, 10 16" stroke="#5A7A38" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <!-- Right branch -->
+        <path d="M110 68 C120 52, 138 38, 160 26 C176 18, 194 14, 210 16" stroke="#5A7A38" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <!-- Left leaves -->
+        <ellipse cx="10"  cy="17" rx="9"  ry="4"   fill="#5A7A38" transform="rotate(-25,10,17)"/>
+        <ellipse cx="26"  cy="15" rx="8"  ry="3.8" fill="#6E8E48" transform="rotate(-18,26,15)"/>
+        <ellipse cx="44"  cy="20" rx="7"  ry="3.5" fill="#5A7A38" transform="rotate(-12,44,20)"/>
+        <ellipse cx="58"  cy="27" rx="7"  ry="3.5" fill="#8AAE5A" transform="rotate(-5,58,27)"/>
+        <ellipse cx="74"  cy="36" rx="6"  ry="3"   fill="#5A7A38" transform="rotate(2,74,36)"/>
+        <ellipse cx="88"  cy="46" rx="6"  ry="3"   fill="#6E8E48" transform="rotate(5,88,46)"/>
+        <!-- Right leaves -->
+        <ellipse cx="210" cy="17" rx="9"  ry="4"   fill="#5A7A38" transform="rotate(25,210,17)"/>
+        <ellipse cx="194" cy="15" rx="8"  ry="3.8" fill="#6E8E48" transform="rotate(18,194,15)"/>
+        <ellipse cx="176" cy="20" rx="7"  ry="3.5" fill="#5A7A38" transform="rotate(12,176,20)"/>
+        <ellipse cx="162" cy="27" rx="7"  ry="3.5" fill="#8AAE5A" transform="rotate(5,162,27)"/>
+        <ellipse cx="146" cy="36" rx="6"  ry="3"   fill="#5A7A38" transform="rotate(-2,146,36)"/>
+        <ellipse cx="132" cy="46" rx="6"  ry="3"   fill="#6E8E48" transform="rotate(-5,132,46)"/>
+        <!-- Orange fruits on wreath -->
+        <circle cx="18"  cy="14" r="5.5" fill="#D4812A" opacity="0.85"/>
+        <circle cx="18"  cy="14" r="5.5" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+        <circle cx="202" cy="14" r="5.5" fill="#D4812A" opacity="0.85"/>
+        <circle cx="202" cy="14" r="5.5" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
+        <circle cx="62"  cy="26" r="4"   fill="#E8783A" opacity="0.7"/>
+        <circle cx="158" cy="26" r="4"   fill="#E8783A" opacity="0.7"/>
+        <!-- Orange blossom flowers (white/cream) -->
+        <g opacity="0.9">
+          <circle cx="40" cy="18" r="3.2" fill="none" stroke="rgba(255,248,230,0.8)" stroke-width="0.8"/>
+          <circle cx="40" cy="18" r="1.2" fill="rgba(232,165,74,0.7)"/>
+          <circle cx="180" cy="18" r="3.2" fill="none" stroke="rgba(255,248,230,0.8)" stroke-width="0.8"/>
+          <circle cx="180" cy="18" r="1.2" fill="rgba(232,165,74,0.7)"/>
+          <circle cx="82" cy="38" r="2.8" fill="none" stroke="rgba(255,248,230,0.7)" stroke-width="0.7"/>
+          <circle cx="82" cy="38" r="1"   fill="rgba(232,165,74,0.6)"/>
+          <circle cx="138" cy="38" r="2.8" fill="none" stroke="rgba(255,248,230,0.7)" stroke-width="0.7"/>
+          <circle cx="138" cy="38" r="1"   fill="rgba(232,165,74,0.6)"/>
+        </g>
+        <!-- Highlights on oranges -->
+        <ellipse cx="15" cy="11" rx="2" ry="1.2" fill="rgba(255,255,255,0.25)" transform="rotate(-20,15,11)"/>
+        <ellipse cx="199" cy="11" rx="2" ry="1.2" fill="rgba(255,255,255,0.25)" transform="rotate(20,199,11)"/>
+        <!-- Calyx (tiny leaf at top of oranges) -->
+        <path d="M18 8 C 16 6, 15 4, 17 3 C 19 4, 20 6, 18 8Z" fill="#5A7A38" opacity="0.8"/>
+        <path d="M202 8 C 200 6, 199 4, 201 3 C 203 4, 204 6, 202 8Z" fill="#5A7A38" opacity="0.8"/>
+      </svg>
+
+      <p class="hero-label">The wedding celebration of</p>
+
+      <h1 class="hero-names">
+        Elena
+        <span class="amp">&amp;</span>
+        Bogdan
+      </h1>
+
+      <div class="hero-divider">
+        <!-- Small orange slice icon -->
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <circle cx="10" cy="10" r="9" fill="none" stroke="rgba(212,129,42,0.6)" stroke-width="1"/>
+          <circle cx="10" cy="10" r="9" fill="rgba(212,129,42,0.12)"/>
+          <!-- Slice segments -->
+          <line x1="10" y1="1"  x2="10" y2="19" stroke="rgba(212,129,42,0.3)" stroke-width="0.7"/>
+          <line x1="1"  y1="10" x2="19" y2="10" stroke="rgba(212,129,42,0.3)" stroke-width="0.7"/>
+          <line x1="3"  y1="3"  x2="17" y2="17" stroke="rgba(212,129,42,0.2)" stroke-width="0.7"/>
+          <line x1="17" y1="3"  x2="3"  y2="17" stroke="rgba(212,129,42,0.2)" stroke-width="0.7"/>
+        </svg>
+      </div>
+
+      <p class="hero-date">Saturday, the eighteenth of July, 2026</p>
+      <p class="hero-location">Seville &nbsp;·&nbsp; Spain</p>
+
+      <!-- Bottom wreath (mirrored) -->
+      <svg class="hero-wreath-bottom" width="160" height="52" viewBox="0 0 220 72" fill="none" aria-hidden="true">
+        <path d="M110 68 C100 52, 82 38, 60 26 C44 18, 26 14, 10 16" stroke="#5A7A38" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <path d="M110 68 C120 52, 138 38, 160 26 C176 18, 194 14, 210 16" stroke="#5A7A38" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+        <ellipse cx="10"  cy="17" rx="8" ry="3.5" fill="#8AAE5A" transform="rotate(-25,10,17)"/>
+        <ellipse cx="30"  cy="15" rx="7" ry="3"   fill="#6E8E48" transform="rotate(-15,30,15)"/>
+        <ellipse cx="50"  cy="22" rx="6" ry="3"   fill="#8AAE5A" transform="rotate(-8,50,22)"/>
+        <ellipse cx="210" cy="17" rx="8" ry="3.5" fill="#8AAE5A" transform="rotate(25,210,17)"/>
+        <ellipse cx="190" cy="15" rx="7" ry="3"   fill="#6E8E48" transform="rotate(15,190,15)"/>
+        <ellipse cx="170" cy="22" rx="6" ry="3"   fill="#8AAE5A" transform="rotate(8,170,22)"/>
+        <circle cx="16" cy="15" r="4" fill="#E8783A" opacity="0.5"/>
+        <circle cx="204" cy="15" r="4" fill="#E8783A" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+
+  <!-- ── INVITATION TEXT ───────────────────────────────── -->
+  <span class="section-border"></span>
+  <section class="invite-section">
+    <div class="invite-wrap">
+      <p class="section-label reveal">With great joy</p>
+      <h2 class="section-title reveal">The Honour of<br>Your Presence</h2>
+      <div class="section-rule reveal"></div>
+
+      <p class="invite-text reveal">
+        Together with their families,
+      </p>
+      <div class="invite-names-block reveal">
+        Elena <span class="amp-sm">&amp;</span> Bogdan
+      </div>
+      <p class="invite-text reveal" style="margin-top:0">
+        request the pleasure of your company<br>
+        at the celebration of their marriage<br><br>
+        on Saturday, the eighteenth of July,<br>
+        in the year two thousand and twenty-six,<br>
+        at four o'clock in the afternoon.
+      </p>
+
+      <!-- Orange ornament divider -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:18px;margin-top:48px" class="reveal">
+        <div style="flex:1;height:1px;max-width:120px;background:linear-gradient(90deg,transparent,rgba(212,129,42,0.25))"></div>
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <!-- Full orange with cross-section look -->
+          <circle cx="20" cy="20" r="17" fill="rgba(212,129,42,0.12)" stroke="rgba(212,129,42,0.35)" stroke-width="1"/>
+          <circle cx="20" cy="20" r="12" fill="none" stroke="rgba(212,129,42,0.15)" stroke-width="0.8"/>
+          <line x1="20" y1="3" x2="20" y2="37" stroke="rgba(212,129,42,0.12)" stroke-width="0.6"/>
+          <line x1="3" y1="20" x2="37" y2="20" stroke="rgba(212,129,42,0.12)" stroke-width="0.6"/>
+          <!-- Calyx -->
+          <path d="M20 3 C 18 1, 17 0, 19 -1 C 21 0, 22 1, 20 3Z" fill="#5A7A38" opacity="0.5"/>
+          <ellipse cx="18" cy="2" rx="3" ry="1.5" fill="#5A7A38" opacity="0.3" transform="rotate(-25,18,2)"/>
+          <ellipse cx="22" cy="2" rx="3" ry="1.5" fill="#5A7A38" opacity="0.3" transform="rotate(25,22,2)"/>
+        </svg>
+        <div style="flex:1;height:1px;max-width:120px;background:linear-gradient(90deg,rgba(212,129,42,0.25),transparent)"></div>
+      </div>
+    </div>
+  </section>
+  <span class="section-border"></span>
+
+
+  <!-- ── ORANGE GROVE SCHEDULE ─────────────────────────── -->
+  <section class="schedule-section" id="scheduleSection">
+
+    <div id="leaf-rain"></div>
+
+    <div class="sch-heading">
+      <p class="section-label reveal">The day unfolds</p>
+      <h2 class="section-title reveal">Programme of the Day</h2>
+      <div class="section-rule reveal"></div>
+    </div>
+
+    <div class="grove-layout" id="groveLayout">
+
+      <!-- LEFT EVENTS -->
+      <div class="events-col left">
+        <div class="event-card" style="margin-top:14px">
+          <div class="event-time">16:00</div>
+          <div class="event-title">Arrival of Guests</div>
+          <div class="event-desc">Welcome drinks in the orange courtyard</div>
+        </div>
+        <div class="event-card" style="margin-top:58px">
+          <div class="event-time">18:00</div>
+          <div class="event-title">Photo Session</div>
+          <div class="event-desc">Golden hour amongst the groves</div>
+        </div>
+        <div class="event-card" style="margin-top:55px">
+          <div class="event-time">21:30</div>
+          <div class="event-title">Wedding Cake</div>
+          <div class="event-desc">Blossom &amp; citrus flavour tower</div>
+        </div>
+      </div>
+
+      <!-- CENTER VINE SVG -->
+      <div class="vine-col" aria-hidden="true">
+        <svg viewBox="0 0 200 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+          <!-- Main vine/branch trunk -->
+          <path d="M100 815 C 98 790, 102 760, 100 730
+                   C 98 700, 104 670, 100 638
+                   C 97 608, 105 576, 102 544
+                   C 99 514, 106 482, 103 450
+                   C 100 420, 107 388, 104 356
+                   C 101 326, 108 294, 105 262
+                   C 102 234, 107 204, 106 175
+                   C 105 148, 103 118, 104 90"
+                stroke="#6A4A28" stroke-width="7" stroke-linecap="round" fill="none"/>
+          <!-- Bark texture -->
+          <path d="M99 780 C 102 775, 104 770, 101 766" stroke="#8A6A3A" stroke-width="1.5" fill="none" opacity="0.35"/>
+          <path d="M103 680 C 100 675, 98 670, 101 666" stroke="#8A6A3A" stroke-width="1.5" fill="none" opacity="0.35"/>
+          <path d="M100 580 C 103 575, 106 570, 103 565" stroke="#8A6A3A" stroke-width="1.5" fill="none" opacity="0.35"/>
+          <path d="M104 480 C 101 475, 99 470, 102 465" stroke="#8A6A3A" stroke-width="1.5" fill="none" opacity="0.35"/>
+          <path d="M102 380 C 105 375, 107 370, 104 366" stroke="#8A6A3A" stroke-width="1.5" fill="none" opacity="0.35"/>
+          <path d="M105 280 C 102 275, 100 270, 103 265" stroke="#8A6A3A" stroke-width="1.5" fill="none" opacity="0.35"/>
+
+          <!-- ── BRANCH RIGHT 1 (Arrival 16:00) ── -->
+          <path d="M102 700 C 118 690, 142 680, 168 670" stroke="#6A4A28" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M160 673 C 172 660, 184 654, 192 644" stroke="#8A6A3A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <!-- Orange fruit -->
+          <circle cx="185" cy="660" r="14" fill="url(#orangeGrad1)"/>
+          <circle cx="185" cy="660" r="14" fill="none" stroke="rgba(160,85,16,0.3)" stroke-width="1"/>
+          <ellipse cx="181" cy="654" rx="4" ry="2.5" fill="rgba(255,255,255,0.22)" transform="rotate(-25,181,654)"/>
+          <!-- Calyx -->
+          <path d="M185 646 C 182 643, 181 640, 184 639 C 186 640, 188 643, 185 646Z" fill="#5A7A38" opacity="0.9"/>
+          <ellipse cx="183" cy="644" rx="3" ry="1.5" fill="#5A7A38" opacity="0.6" transform="rotate(-20,183,644)"/>
+          <ellipse cx="187" cy="644" rx="3" ry="1.5" fill="#6E8E48" opacity="0.5" transform="rotate(20,187,644)"/>
+          <!-- Leaves -->
+          <ellipse cx="174" cy="668" rx="8" ry="3.5" fill="#5A7A38" transform="rotate(-25,174,668)"/>
+          <ellipse cx="164" cy="676" rx="7" ry="3"   fill="#6E8E48" transform="rotate(-10,164,676)"/>
+          <ellipse cx="188" cy="678" rx="7" ry="3"   fill="#8AAE5A" transform="rotate(15,188,678)"/>
+          <!-- Blossoms -->
+          <circle cx="170" cy="680" r="2.8" fill="none" stroke="rgba(255,248,230,0.8)" stroke-width="0.7"/>
+          <circle cx="170" cy="680" r="1" fill="rgba(232,165,74,0.6)"/>
+
+          <!-- ── BRANCH LEFT 1 (Ceremony 16:30) ── -->
+          <path d="M100 640 C 82 630, 56 618, 30 608" stroke="#6A4A28" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M38 611 C 24 597, 12 590, 4 580" stroke="#8A6A3A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <!-- Orange -->
+          <circle cx="18" cy="595" r="14" fill="url(#orangeGrad2)"/>
+          <circle cx="18" cy="595" r="14" fill="none" stroke="rgba(160,85,16,0.3)" stroke-width="1"/>
+          <ellipse cx="14" cy="589" rx="4" ry="2.5" fill="rgba(255,255,255,0.22)" transform="rotate(20,14,589)"/>
+          <path d="M18 581 C 16 578, 15 575, 17 574 C 19 575, 20 578, 18 581Z" fill="#5A7A38" opacity="0.9"/>
+          <ellipse cx="16" cy="579" rx="3" ry="1.5" fill="#5A7A38" opacity="0.5" transform="rotate(-15,16,579)"/>
+          <!-- Leaves -->
+          <ellipse cx="30" cy="603" rx="8" ry="3.5" fill="#5A7A38" transform="rotate(22,30,603)"/>
+          <ellipse cx="42" cy="610" rx="7" ry="3"   fill="#6E8E48" transform="rotate(8,42,610)"/>
+          <ellipse cx="12" cy="612" rx="7" ry="3"   fill="#8AAE5A" transform="rotate(-18,12,612)"/>
+          <!-- Blossom -->
+          <circle cx="34" cy="614" r="2.6" fill="none" stroke="rgba(255,248,230,0.75)" stroke-width="0.7"/>
+          <circle cx="34" cy="614" r="0.9" fill="rgba(232,165,74,0.5)"/>
+
+          <!-- ── BRANCH RIGHT 2 (Photo 18:00) ── -->
+          <path d="M103 540 C 120 530, 146 518, 172 506" stroke="#6A4A28" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <path d="M164 509 C 176 496, 188 488, 196 478" stroke="#8A6A3A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <!-- Orange -->
+          <circle cx="190" cy="494" r="12" fill="url(#orangeGrad1)"/>
+          <circle cx="190" cy="494" r="12" fill="none" stroke="rgba(160,85,16,0.3)" stroke-width="1"/>
+          <ellipse cx="186" cy="489" rx="3.5" ry="2" fill="rgba(255,255,255,0.2)" transform="rotate(-22,186,489)"/>
+          <path d="M190 482 C 188 480, 187 477, 189 476 C 191 477, 192 480, 190 482Z" fill="#5A7A38" opacity="0.85"/>
+          <!-- Leaves -->
+          <ellipse cx="178" cy="502" rx="7" ry="3" fill="#5A7A38" transform="rotate(-28,178,502)"/>
+          <ellipse cx="168" cy="510" rx="6" ry="2.8" fill="#6E8E48" transform="rotate(-12,168,510)"/>
+          <ellipse cx="192" cy="510" rx="6" ry="2.8" fill="#8AAE5A" transform="rotate(18,192,510)"/>
+
+          <!-- ── BRANCH LEFT 2 (Cocktail 19:00) ── -->
+          <path d="M101 478 C 84 468, 58 454, 32 442" stroke="#6A4A28" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <path d="M40 446 C 26 432, 14 424, 6 414" stroke="#8A6A3A" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <!-- Orange -->
+          <circle cx="16" cy="430" r="12" fill="url(#orangeGrad2)"/>
+          <circle cx="16" cy="430" r="12" fill="none" stroke="rgba(160,85,16,0.3)" stroke-width="1"/>
+          <ellipse cx="12" cy="425" rx="3.5" ry="2" fill="rgba(255,255,255,0.2)" transform="rotate(18,12,425)"/>
+          <path d="M16 418 C 14 416, 13 413, 15 412 C 17 413, 18 416, 16 418Z" fill="#5A7A38" opacity="0.85"/>
+          <!-- Leaves -->
+          <ellipse cx="28" cy="438" rx="7" ry="3" fill="#5A7A38" transform="rotate(25,28,438)"/>
+          <ellipse cx="38" cy="446" rx="6" ry="2.8" fill="#6E8E48" transform="rotate(10,38,446)"/>
+          <ellipse cx="10" cy="448" rx="6" ry="2.8" fill="#8AAE5A" transform="rotate(-20,10,448)"/>
+          <!-- Blossom -->
+          <circle cx="42" cy="448" r="2.4" fill="none" stroke="rgba(255,248,230,0.7)" stroke-width="0.6"/>
+          <circle cx="42" cy="448" r="0.8" fill="rgba(232,165,74,0.5)"/>
+
+          <!-- ── BRANCH RIGHT 3 (Cake 21:30) ── -->
+          <path d="M104 370 C 122 358, 148 344, 174 332" stroke="#6A4A28" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M166 335 C 178 322, 190 314, 198 304" stroke="#8A6A3A" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <!-- Orange -->
+          <circle cx="192" cy="320" r="11" fill="url(#orangeGrad1)"/>
+          <circle cx="192" cy="320" r="11" fill="none" stroke="rgba(160,85,16,0.25)" stroke-width="1"/>
+          <ellipse cx="188" cy="315" rx="3" ry="1.8" fill="rgba(255,255,255,0.18)" transform="rotate(-20,188,315)"/>
+          <path d="M192 309 C 190 307, 189 305, 191 304 C 193 305, 194 307, 192 309Z" fill="#5A7A38" opacity="0.85"/>
+          <!-- Leaves -->
+          <ellipse cx="180" cy="328" rx="6" ry="2.8" fill="#5A7A38" transform="rotate(-30,180,328)"/>
+          <ellipse cx="170" cy="335" rx="6" ry="2.8" fill="#6E8E48" transform="rotate(-15,170,335)"/>
+          <ellipse cx="194" cy="335" rx="6" ry="2.8" fill="#8AAE5A" transform="rotate(20,194,335)"/>
+
+          <!-- ── BRANCH LEFT 3 (Dance 23:00) ── -->
+          <path d="M103 310 C 86 298, 60 284, 34 272" stroke="#6A4A28" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M42 276 C 28 262, 16 254, 8 244" stroke="#8A6A3A" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <!-- Orange -->
+          <circle cx="18" cy="260" r="11" fill="url(#orangeGrad2)"/>
+          <circle cx="18" cy="260" r="11" fill="none" stroke="rgba(160,85,16,0.25)" stroke-width="1"/>
+          <ellipse cx="14" cy="255" rx="3" ry="1.8" fill="rgba(255,255,255,0.18)" transform="rotate(22,14,255)"/>
+          <path d="M18 249 C 16 247, 15 244, 17 243 C 19 244, 20 247, 18 249Z" fill="#5A7A38" opacity="0.85"/>
+          <!-- Leaves -->
+          <ellipse cx="30" cy="268" rx="6" ry="2.8" fill="#5A7A38" transform="rotate(28,30,268)"/>
+          <ellipse cx="40" cy="276" rx="6" ry="2.8" fill="#6E8E48" transform="rotate(12,40,276)"/>
+          <ellipse cx="10" cy="278" rx="6" ry="2.8" fill="#8AAE5A" transform="rotate(-22,10,278)"/>
+
+          <!-- ── TOP CANOPY ── -->
+          <path d="M104 90 C 96 70, 85 50, 72 32" stroke="#6A4A28" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M106 90 C 114 68, 125 48, 138 30" stroke="#6A4A28" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M105 90 C 104 68, 106 45, 105 24" stroke="#6A4A28" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <!-- Secondary -->
+          <path d="M72 32 C 64 22, 54 14, 44 10" stroke="#8A6A3A" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M138 30 C 146 20, 156 12, 166 8" stroke="#8A6A3A" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M72 32 C 78 20, 88 12, 96 8" stroke="#8A6A3A" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <path d="M138 30 C 132 18, 122 10, 114 6" stroke="#8A6A3A" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+
+          <!-- Canopy leaves -->
+          <g opacity="0.9">
+            <ellipse cx="42" cy="9"   rx="8" ry="3.5" fill="#5A7A38" transform="rotate(40,42,9)"/>
+            <ellipse cx="54" cy="14"  rx="7" ry="3"   fill="#6E8E48" transform="rotate(30,54,14)"/>
+            <ellipse cx="66" cy="24"  rx="7" ry="3"   fill="#5A7A38" transform="rotate(20,66,24)"/>
+            <ellipse cx="78" cy="30"  rx="6" ry="3"   fill="#8AAE5A" transform="rotate(10,78,30)"/>
+            <ellipse cx="90" cy="18"  rx="7" ry="3"   fill="#5A7A38" transform="rotate(-10,90,18)"/>
+            <ellipse cx="100" cy="10" rx="8" ry="3.5" fill="#6E8E48" transform="rotate(-5,100,10)"/>
+            <ellipse cx="110" cy="8"  rx="8" ry="3.5" fill="#5A7A38" transform="rotate(5,110,8)"/>
+            <ellipse cx="120" cy="16" rx="7" ry="3"   fill="#8AAE5A" transform="rotate(10,120,16)"/>
+            <ellipse cx="132" cy="28" rx="6" ry="3"   fill="#5A7A38" transform="rotate(-15,132,28)"/>
+            <ellipse cx="144" cy="18" rx="7" ry="3"   fill="#6E8E48" transform="rotate(-30,144,18)"/>
+            <ellipse cx="158" cy="10" rx="7" ry="3"   fill="#5A7A38" transform="rotate(-35,158,10)"/>
+            <ellipse cx="168" cy="8"  rx="8" ry="3.5" fill="#8AAE5A" transform="rotate(-42,168,8)"/>
+            <!-- Extra canopy volume -->
+            <ellipse cx="60" cy="8"  rx="6" ry="2.8" fill="#B0D080" transform="rotate(35,60,8)"/>
+            <ellipse cx="80" cy="6"  rx="7" ry="3"   fill="#6E8E48" transform="rotate(-20,80,6)"/>
+            <ellipse cx="130" cy="6" rx="7" ry="3"   fill="#6E8E48" transform="rotate(18,130,6)"/>
+            <ellipse cx="150" cy="6" rx="6" ry="2.8" fill="#B0D080" transform="rotate(-32,150,6)"/>
+          </g>
+          <!-- Canopy oranges -->
+          <circle cx="55" cy="16" r="6" fill="#D4812A" opacity="0.8"/>
+          <ellipse cx="52" cy="12" rx="2" ry="1.2" fill="rgba(255,255,255,0.2)" transform="rotate(-15,52,12)"/>
+          <circle cx="155" cy="14" r="6" fill="#E8783A" opacity="0.75"/>
+          <ellipse cx="152" cy="10" rx="2" ry="1.2" fill="rgba(255,255,255,0.18)" transform="rotate(15,152,10)"/>
+          <circle cx="105" cy="20" r="5" fill="#D4812A" opacity="0.65"/>
+          <!-- Canopy blossoms -->
+          <circle cx="84" cy="14" r="3" fill="none" stroke="rgba(255,248,230,0.8)" stroke-width="0.8"/>
+          <circle cx="84" cy="14" r="1" fill="rgba(232,165,74,0.6)"/>
+          <circle cx="125" cy="12" r="3" fill="none" stroke="rgba(255,248,230,0.8)" stroke-width="0.8"/>
+          <circle cx="125" cy="12" r="1" fill="rgba(232,165,74,0.6)"/>
+
+          <!-- Gradients -->
+          <defs>
+            <radialGradient id="orangeGrad1" cx="45%" cy="40%" r="55%">
+              <stop offset="0%"   stop-color="#F5C882"/>
+              <stop offset="50%"  stop-color="#D4812A"/>
+              <stop offset="100%" stop-color="#A05510"/>
+            </radialGradient>
+            <radialGradient id="orangeGrad2" cx="40%" cy="38%" r="55%">
+              <stop offset="0%"   stop-color="#F7D8A0"/>
+              <stop offset="50%"  stop-color="#E8783A"/>
+              <stop offset="100%" stop-color="#A05510"/>
+            </radialGradient>
+          </defs>
+
+        </svg>
+      </div>
+
+      <!-- RIGHT EVENTS -->
+      <div class="events-col right">
+        <div class="event-card" style="margin-top:100px">
+          <div class="event-time">16:30</div>
+          <div class="event-title">Wedding Ceremony</div>
+          <div class="event-desc">Vows in the citrus garden chapel</div>
+        </div>
+        <div class="event-card" style="margin-top:52px">
+          <div class="event-time">19:00</div>
+          <div class="event-title">Cocktail Reception</div>
+          <div class="event-desc">Signature citrus cocktails &amp; tapas</div>
+        </div>
+        <div class="event-card" style="margin-top:52px">
+          <div class="event-time">23:00</div>
+          <div class="event-title">Dancing &amp; Fiesta</div>
+          <div class="event-desc">Under the stars until dawn</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <span class="section-border"></span>
+
+
+  <!-- ── DETAILS ───────────────────────────────────────── -->
+  <section class="details-section">
+    <p class="section-label reveal">Good to know</p>
+    <h2 class="section-title reveal">The Details</h2>
+    <div class="section-rule reveal"></div>
+
+    <div class="details-grid">
+
+      <div class="detail-card reveal">
+        <div class="detail-icon">
+          <svg viewBox="0 0 48 48" fill="none">
+            <rect x="4" y="8" width="40" height="36" rx="3" stroke="#D4812A" stroke-width="1.7"/>
+            <line x1="4" y1="18" x2="44" y2="18" stroke="#D4812A" stroke-width="1.7"/>
+            <line x1="14" y1="3"  x2="14" y2="13" stroke="#D4812A" stroke-width="1.7" stroke-linecap="round"/>
+            <line x1="34" y1="3"  x2="34" y2="13" stroke="#D4812A" stroke-width="1.7" stroke-linecap="round"/>
+            <circle cx="17" cy="28" r="3" fill="#D4812A" opacity="0.6"/>
+            <circle cx="31" cy="28" r="3" fill="#D4812A" opacity="0.6"/>
+            <circle cx="17" cy="37" r="3" fill="#D4812A" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="detail-label">Date</div>
+        <div class="detail-value">
+          18 July 2026
+          <small>Saturday</small>
+        </div>
+      </div>
+
+      <div class="detail-card reveal">
+        <div class="detail-icon">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M24 4 C14 4, 6 12, 6 22 C6 36, 24 46, 24 46 C24 46, 42 36, 42 22 C42 12, 34 4, 24 4Z"
+                  stroke="#D4812A" stroke-width="1.7" fill="rgba(212,129,42,0.06)"/>
+            <circle cx="24" cy="21" r="6" stroke="#D4812A" stroke-width="1.5" fill="rgba(212,129,42,0.08)"/>
+            <circle cx="24" cy="21" r="2" fill="#D4812A" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="detail-label">Venue</div>
+        <div class="detail-value">
+          Hacienda de los Naranjos
+          <small>Seville, Spain</small>
+        </div>
+      </div>
+
+      <div class="detail-card reveal">
+        <div class="detail-icon">
+          <!-- Orange blossom icon for dress code -->
+          <svg viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="9" fill="none" stroke="rgba(212,129,42,0.4)" stroke-width="1"/>
+            <circle cx="24" cy="24" r="4" fill="rgba(212,129,42,0.25)"/>
+            <!-- Petals -->
+            <ellipse cx="24" cy="12" rx="4" ry="6" fill="rgba(212,129,42,0.15)" stroke="rgba(212,129,42,0.3)" stroke-width="0.8"/>
+            <ellipse cx="35" cy="18" rx="4" ry="6" fill="rgba(212,129,42,0.15)" stroke="rgba(212,129,42,0.3)" stroke-width="0.8" transform="rotate(72,35,18)"/>
+            <ellipse cx="31" cy="33" rx="4" ry="6" fill="rgba(212,129,42,0.15)" stroke="rgba(212,129,42,0.3)" stroke-width="0.8" transform="rotate(144,31,33)"/>
+            <ellipse cx="17" cy="33" rx="4" ry="6" fill="rgba(212,129,42,0.15)" stroke="rgba(212,129,42,0.3)" stroke-width="0.8" transform="rotate(216,17,33)"/>
+            <ellipse cx="13" cy="18" rx="4" ry="6" fill="rgba(212,129,42,0.15)" stroke="rgba(212,129,42,0.3)" stroke-width="0.8" transform="rotate(288,13,18)"/>
+          </svg>
+        </div>
+        <div class="detail-label">Dress Code</div>
+        <div class="detail-value">
+          Cocktail Elegant
+          <small>Mediterranean garden party</small>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <span class="section-border"></span>
+
+
+  <!-- ── CLOSING ───────────────────────────────────────── -->
+  <section class="closing-section">
+
+    <!-- Ornament: orange branch wreath -->
+    <div class="reveal" style="text-align:center;margin-bottom:0">
+      <svg width="190" height="58" viewBox="0 0 190 58" fill="none" aria-hidden="true">
+        <path d="M95 54 C85 40, 68 28, 48 18 C34 12, 18 8, 4 10" stroke="#5A7A38" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M95 54 C105 40, 122 28, 142 18 C156 12, 172 8, 186 10" stroke="#5A7A38" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <ellipse cx="4"   cy="11" rx="7" ry="3" fill="#6E8E48" transform="rotate(-20,4,11)" opacity="0.8"/>
+        <ellipse cx="22"  cy="10" rx="6" ry="2.8" fill="#5A7A38" transform="rotate(-12,22,10)" opacity="0.8"/>
+        <ellipse cx="40"  cy="16" rx="5.5" ry="2.5" fill="#8AAE5A" transform="rotate(-5,40,16)" opacity="0.8"/>
+        <ellipse cx="186" cy="11" rx="7" ry="3" fill="#6E8E48" transform="rotate(20,186,11)" opacity="0.8"/>
+        <ellipse cx="168" cy="10" rx="6" ry="2.8" fill="#5A7A38" transform="rotate(12,168,10)" opacity="0.8"/>
+        <ellipse cx="150" cy="16" rx="5.5" ry="2.5" fill="#8AAE5A" transform="rotate(5,150,16)" opacity="0.8"/>
+        <!-- Oranges -->
+        <circle cx="12" cy="10" r="4" fill="#D4812A" opacity="0.7"/>
+        <circle cx="178" cy="10" r="4" fill="#D4812A" opacity="0.7"/>
+        <circle cx="55" cy="22" r="3" fill="#E8783A" opacity="0.5"/>
+        <circle cx="135" cy="22" r="3" fill="#E8783A" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <p class="closing-quote reveal">
+      "I have waited for this opportunity,<br>
+      not knowing what I was waiting for.<br>
+      But finding you made every wait<br>
+      worthwhile."
+    </p>
+    <div class="closing-rule reveal"></div>
+    <p class="closing-names reveal">
+      Elena <span class="amp">&amp;</span> Bogdan
+    </p>
+  </section>
+  <span class="section-border"></span>
+
+
+  <!-- ── RSVP ──────────────────────────────────────────── -->
+  <section class="rsvp-section" id="rsvp">
+    <div class="rsvp-wrap">
+      <p class="section-label reveal">Kindly reply by 1 June 2026</p>
+      <h2 class="section-title reveal">RSVP</h2>
+      <div class="section-rule reveal"></div>
+
+      <form id="rsvpForm" class="rsvp-form reveal" novalidate>
+        <div class="form-group">
+          <label for="rsvp-name">Your full name</label>
+          <input id="rsvp-name" type="text" name="name" placeholder="First and last name" required />
+        </div>
+        <div class="form-group">
+          <label>Will you attend?</label>
+          <div class="attend-toggle">
+            <input type="radio" id="att-yes" name="attending" value="yes" />
+            <label for="att-yes">Joyfully accepts</label>
+            <input type="radio" id="att-no"  name="attending" value="no"  />
+            <label for="att-no">Regretfully declines</label>
+          </div>
+        </div>
+        <div class="conditional-fields" id="conditionalFields">
+          <div class="form-group">
+            <label>Number of guests (including yourself)</label>
+            <div class="num-stepper">
+              <button type="button" class="num-btn" id="numMinus">−</button>
+              <div class="num-display" id="numDisplay">1</div>
+              <button type="button" class="num-btn" id="numPlus">+</button>
+            </div>
+            <input type="hidden" name="guests" id="guestsInput" value="1" />
+          </div>
+          <div class="form-group">
+            <label>Dietary preferences</label>
+            <div class="check-grid">
+              <label class="check-option">
+                <input type="checkbox" name="dietary" value="No restrictions" />
+                <span class="check-box">✓</span>
+                <span>No restrictions</span>
+              </label>
+              <label class="check-option">
+                <input type="checkbox" name="dietary" value="Vegetarian" />
+                <span class="check-box">✓</span>
+                <span>Vegetarian</span>
+              </label>
+              <label class="check-option">
+                <input type="checkbox" name="dietary" value="Vegan" />
+                <span class="check-box">✓</span>
+                <span>Vegan</span>
+              </label>
+              <label class="check-option">
+                <input type="checkbox" name="dietary" value="Gluten-free" />
+                <span class="check-box">✓</span>
+                <span>Gluten-free</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="rsvp-song">Song request for the fiesta</label>
+            <input id="rsvp-song" type="text" name="song" placeholder="Artist — Song title" />
+          </div>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn" disabled>Send RSVP</button>
+      </form>
+
+      <div class="rsvp-success" id="rsvpSuccess">
+        <svg width="52" height="52" viewBox="0 0 52 52" fill="none">
+          <circle cx="26" cy="26" r="20" fill="rgba(212,129,42,0.08)" stroke="#D4812A" stroke-width="1.2"/>
+          <path d="M16 26 L22 32 L36 18" stroke="#D4812A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="26" cy="4" r="3" fill="#5A7A38" opacity="0.5"/>
+        </svg>
+        <h3>Wonderful!</h3>
+        <p>Elena &amp; Bogdan can't wait to celebrate with you in Seville.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>With love &nbsp;·&nbsp; Elena &amp; Bogdan &nbsp;·&nbsp; Seville MMXXVI</p>
+  </footer>
+
+
+  <script>
+    // ═══════════════════════════════════════════════════════
+    //  SCROLL REVEAL
+    // ═══════════════════════════════════════════════════════
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // Event cards
+    const cardObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); cardObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.22 });
+    document.querySelectorAll('.event-card').forEach(el => cardObs.observe(el));
+
+
+    // ═══════════════════════════════════════════════════════
+    //  FALLING LEAVES & ORANGE BLOSSOM PETALS
+    // ═══════════════════════════════════════════════════════
+    const scheduleSection = document.getElementById('scheduleSection');
+    const leafRain = document.getElementById('leaf-rain');
+
+    const leafShapes = [
+      'M0,-13 C3,-9 4,-2 3,6 L0,13 C-3,9 -4,-2 -3,-9 Z',
+      'M0,-11 C4,-7 5,0 4,8 L0,11 C-4,7 -5,0 -4,-7 Z',
+      'M0,-14 C2,-10 3,-3 2,7 L0,14 C-2,10 -3,-3 -2,-10 Z',
+    ];
+    const leafColors = ['#5A7A38','#6E8E48','#3D5A22','#8AAE5A','#B0D080'];
+
+    let leavesActive = false;
+    let leafTimer = null;
+
+    function spawnLeaf() {
+      const ns  = 'http://www.w3.org/2000/svg';
+      const svg = document.createElementNS(ns, 'svg');
+      const sz  = 14 + Math.random() * 14;
+      svg.setAttribute('viewBox', '-6 -16 12 32');
+      svg.setAttribute('width', sz);
+      svg.setAttribute('height', sz * 2.2);
+      svg.classList.add('falling-leaf');
+
+      const path = document.createElementNS(ns, 'path');
+      path.setAttribute('d', leafShapes[Math.floor(Math.random() * leafShapes.length)]);
+      path.setAttribute('fill', leafColors[Math.floor(Math.random() * leafColors.length)]);
+      path.setAttribute('opacity', (0.5 + Math.random() * 0.45).toFixed(2));
+
+      const rib = document.createElementNS(ns, 'line');
+      rib.setAttribute('x1','0'); rib.setAttribute('y1','-11');
+      rib.setAttribute('x2','0'); rib.setAttribute('y2','11');
+      rib.setAttribute('stroke','#3D5A22'); rib.setAttribute('stroke-width','0.6'); rib.setAttribute('opacity','0.25');
+
+      svg.appendChild(path);
+      svg.appendChild(rib);
+
+      svg.style.left = (Math.random() * 96 + 2) + '%';
+      svg.style.animationDuration  = (4.5 + Math.random() * 5).toFixed(1) + 's';
+      svg.style.animationDelay     = (Math.random() * 0.6).toFixed(2) + 's';
+      svg.style.transform          = `rotate(${Math.floor(Math.random() * 360)}deg)`;
+
+      leafRain.appendChild(svg);
+      svg.addEventListener('animationend', () => svg.remove(), { once: true });
+    }
+
+    function spawnPetal() {
+      const el = document.createElement('div');
+      el.classList.add('falling-petal');
+      const sz = 6 + Math.random() * 8;
+      el.style.width  = sz + 'px';
+      el.style.height = sz + 'px';
+      el.style.borderRadius = '50% 50% 50% 0';
+      el.style.background = `rgba(255, ${220 + Math.floor(Math.random() * 35)}, ${200 + Math.floor(Math.random() * 40)}, ${(0.4 + Math.random() * 0.4).toFixed(2)})`;
+      el.style.left = (Math.random() * 96 + 2) + '%';
+      el.style.animationDuration = (5 + Math.random() * 5).toFixed(1) + 's';
+      el.style.animationDelay    = (Math.random() * 1.2).toFixed(2) + 's';
+      el.style.transform         = `rotate(${Math.floor(Math.random() * 360)}deg)`;
+
+      leafRain.appendChild(el);
+      el.addEventListener('animationend', () => el.remove(), { once: true });
+    }
+
+    function startRain() {
+      if (leavesActive) return;
+      leavesActive = true;
+
+      for (let i = 0; i < 10; i++) setTimeout(spawnLeaf,  i * 130);
+      for (let i = 0; i < 6;  i++) setTimeout(spawnPetal, i * 200 + 400);
+
+      leafTimer = setInterval(() => {
+        spawnLeaf();
+        if (Math.random() > 0.5) spawnPetal();
+      }, 650);
+
+      setTimeout(() => { clearInterval(leafTimer); leafTimer = null; }, 16000);
+    }
+
+    const treeObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          leavesActive = false;
+          clearInterval(leafTimer);
+          leafTimer = null;
+          startRain();
+        }
+      });
+    }, { threshold: 0.08 });
+    treeObs.observe(scheduleSection);
+
+
+    // ═══════════════════════════════════════════════════════
+    //  RSVP FORM
+    // ═══════════════════════════════════════════════════════
+    //
+    // HOW TO CONNECT TO GOOGLE SHEETS:
+    // 1. Google Sheets → Extensions → Apps Script
+    // 2. Paste the script below → Deploy → New deployment → Web app
+    //    (Execute as: Me, Who has access: Anyone)
+    // 3. Copy the web app URL into SHEET_URL below.
+    //
+    // ---- Apps Script ----
+    // function doPost(e) {
+    //   var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    //   var d = JSON.parse(e.postData.contents);
+    //   if (sheet.getLastRow() === 0)
+    //     sheet.appendRow(['Timestamp','Name','Attending','Guests','Dietary','Song']);
+    //   sheet.appendRow([new Date().toLocaleString(), d.name, d.attending,
+    //                    d.guests||'', d.dietary||'', d.song||'']);
+    //   return ContentService
+    //     .createTextOutput(JSON.stringify({result:'success'}))
+    //     .setMimeType(ContentService.MimeType.JSON);
+    // }
+    // ---------------------
+
+    const SHEET_URL = ''; // ← paste your Google Apps Script web app URL here
+
+    const rsvpForm        = document.getElementById('rsvpForm');
+    const rsvpSuccess     = document.getElementById('rsvpSuccess');
+    const submitBtn       = document.getElementById('submitBtn');
+    const conditionalFlds = document.getElementById('conditionalFields');
+    const attendRadios    = document.querySelectorAll('input[name="attending"]');
+    const numMinus        = document.getElementById('numMinus');
+    const numPlus         = document.getElementById('numPlus');
+    const numDisplay      = document.getElementById('numDisplay');
+    const guestsInput     = document.getElementById('guestsInput');
+
+    function checkReady() {
+      const name = rsvpForm.elements['name'].value.trim();
+      const att  = rsvpForm.elements['attending'].value;
+      submitBtn.disabled = !(name && att);
+    }
+    rsvpForm.elements['name'].addEventListener('input', checkReady);
+
+    attendRadios.forEach(r => r.addEventListener('change', () => {
+      const yes = rsvpForm.elements['attending'].value === 'yes';
+      conditionalFlds.classList.toggle('visible', yes);
+      checkReady();
+    }));
+
+    let guestCount = 1;
+    function updateGuests(delta) {
+      guestCount = Math.max(1, Math.min(20, guestCount + delta));
+      numDisplay.textContent = guestCount;
+      guestsInput.value      = guestCount;
+    }
+    numMinus.addEventListener('click', () => updateGuests(-1));
+    numPlus.addEventListener ('click', () => updateGuests(+1));
+
+    rsvpForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Sending…';
+
+      const attending = rsvpForm.elements['attending'].value;
+      const dietary   = [...rsvpForm.querySelectorAll('input[name="dietary"]:checked')]
+                          .map(c => c.value).join(', ');
+      const payload = {
+        name:      rsvpForm.elements['name'].value.trim(),
+        attending,
+        guests:    attending === 'yes' ? guestsInput.value : '',
+        dietary:   attending === 'yes' ? dietary           : '',
+        song:      attending === 'yes' ? (rsvpForm.elements['song']?.value?.trim() || '') : '',
+      };
+
+      try {
+        if (SHEET_URL) {
+          await fetch(SHEET_URL, {
+            method: 'POST', mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify(payload),
+          });
+        }
+      } catch (_) {}
+
+      rsvpForm.style.display = 'none';
+      rsvpSuccess.classList.add('show');
+    });
+  </script>
+
+</body>
+</html>
