@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Irina & Cătălin — Nunta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Montserrat:wght@200;300;400;500&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --burgundy: #6B1331;
+      --burgundy-deep: #3E0A1E;
+      --burgundy-light: #8C1A42;
+      --gold: #C9A94E;
+      --gold-light: #E8D48B;
+      --gold-pale: #F5ECD0;
+      --champagne: #F7F0E3;
+      --cream: #FFFBF5;
+      --noir: #1A0A10;
+      --velvet: #2D0F1E;
+      --rose: #D4A0A0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: var(--burgundy-deep);
+      overflow-x: hidden;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ─── CURTAIN REVEAL ─── */
+    .curtain-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: all;
+      display: flex;
+    }
+
+    .curtain-left, .curtain-right {
+      width: 50%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .curtain-left {
+      background: linear-gradient(135deg, var(--burgundy-deep) 0%, var(--burgundy) 50%, var(--burgundy-light) 100%);
+      transform-origin: left center;
+      animation: curtainOpenLeft 2s cubic-bezier(0.65, 0, 0.35, 1) 1.5s forwards;
+    }
+
+    .curtain-right {
+      background: linear-gradient(225deg, var(--burgundy-deep) 0%, var(--burgundy) 50%, var(--burgundy-light) 100%);
+      transform-origin: right center;
+      animation: curtainOpenRight 2s cubic-bezier(0.65, 0, 0.35, 1) 1.5s forwards;
+    }
+
+    /* Curtain fabric folds */
+    .curtain-left::before, .curtain-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 30px,
+        rgba(0,0,0,0.08) 30px,
+        rgba(0,0,0,0.08) 32px,
+        transparent 32px,
+        transparent 60px,
+        rgba(255,255,255,0.04) 60px,
+        rgba(255,255,255,0.04) 62px
+      );
+    }
+
+    /* Gold trim on curtain edges */
+    .curtain-left::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--gold-light), var(--gold));
+      box-shadow: 0 0 20px rgba(201, 169, 78, 0.4);
+    }
+
+    .curtain-right::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--gold), var(--gold-light), var(--gold));
+      box-shadow: 0 0 20px rgba(201, 169, 78, 0.4);
+    }
+
+    .curtain-monogram {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10000;
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(3rem, 8vw, 6rem);
+      color: var(--gold);
+      text-shadow: 0 0 40px rgba(201, 169, 78, 0.6);
+      opacity: 0;
+      animation: monogramReveal 1.2s ease-out 0.3s forwards, monogramFade 0.8s ease-in 1.8s forwards;
+    }
+
+    @keyframes curtainOpenLeft {
+      to { transform: translateX(-105%); }
+    }
+
+    @keyframes curtainOpenRight {
+      to { transform: translateX(105%); }
+    }
+
+    @keyframes monogramReveal {
+      from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+
+    @keyframes monogramFade {
+      to { opacity: 0; pointer-events: none; }
+    }
+
+    .curtain-overlay.opened {
+      pointer-events: none;
+    }
+
+    /* ─── BAROQUE BORDER FRAME ─── */
+    .baroque-frame {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .baroque-frame::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(201, 169, 78, 0.2);
+      border-radius: 2px;
+    }
+
+    .frame-corner {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      opacity: 0.4;
+    }
+
+    .frame-corner svg { width: 100%; height: 100%; }
+
+    .frame-corner.tl { top: 12px; left: 12px; }
+    .frame-corner.tr { top: 12px; right: 12px; transform: scaleX(-1); }
+    .frame-corner.bl { bottom: 12px; left: 12px; transform: scaleY(-1); }
+    .frame-corner.br { bottom: 12px; right: 12px; transform: scale(-1); }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(107, 19, 49, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(201, 169, 78, 0.04) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(201, 169, 78, 0.04) 0%, transparent 50%),
+        var(--cream);
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-mask {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(280px, 60vw, 500px);
+      height: auto;
+      opacity: 0.04;
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: heroFadeIn 1.5s ease-out 3s forwards;
+    }
+
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200;
+      font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-names {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 400;
+      color: var(--burgundy-deep);
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-names .amp {
+      font-family: 'Great Vibes', cursive;
+      font-size: 0.7em;
+      color: var(--gold);
+      display: inline-block;
+      margin: 0 0.15em;
+      vertical-align: middle;
+    }
+
+    .hero-date {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: clamp(0.85rem, 1.8vw, 1.1rem);
+      letter-spacing: 0.2em;
+      color: var(--burgundy);
+      margin-top: 1rem;
+    }
+
+    .hero-location {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200;
+      font-size: clamp(0.75rem, 1.4vw, 0.95rem);
+      letter-spacing: 0.15em;
+      color: var(--rose);
+      margin-top: 0.4rem;
+    }
+
+    .hero-ornament {
+      width: clamp(120px, 20vw, 200px);
+      margin: 1.5rem auto;
+      opacity: 0.5;
+    }
+
+    .hero-ornament svg { width: 100%; height: auto; }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0;
+      animation: heroFadeIn 1s ease-out 3.8s forwards;
+    }
+
+    .scroll-indicator span {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 300;
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
+      transform: rotate(45deg);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: rotate(45deg) translateY(0); }
+      50% { opacity: 1; transform: rotate(45deg) translateY(5px); }
+    }
+
+    /* ─── SECTIONS COMMON ─── */
+    section {
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      font-weight: 400;
+      color: var(--burgundy-deep);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200;
+      font-size: clamp(0.65rem, 1.2vw, 0.8rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+
+    /* ─── INVITATION TEXT ─── */
+    .invitation-section {
+      text-align: center;
+      position: relative;
+    }
+
+    .invitation-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--burgundy);
+      line-height: 2;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .invitation-text .highlight {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.4em;
+      font-style: normal;
+      color: var(--gold);
+      display: inline-block;
+    }
+
+    .mask-divider {
+      width: clamp(80px, 15vw, 140px);
+      margin: 2.5rem auto;
+      opacity: 0.3;
+    }
+
+    .mask-divider svg { width: 100%; height: auto; }
+
+    /* ─── SCHEDULE CARDS ─── */
+    .schedule-section {
+      background:
+        linear-gradient(135deg, var(--velvet) 0%, var(--burgundy-deep) 50%, var(--noir) 100%);
+      max-width: 100%;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .schedule-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(201, 169, 78, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(201, 169, 78, 0.06) 0%, transparent 50%);
+    }
+
+    .schedule-section .section-title {
+      color: var(--gold-pale);
+    }
+
+    .schedule-section .section-subtitle {
+      color: var(--gold);
+      opacity: 0.6;
+    }
+
+    .schedule-section .divider {
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+
+    .schedule-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .schedule-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .schedule-timeline::before {
+      content: '';
+      position: absolute;
+      left: 15px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, transparent, var(--gold) 10%, var(--gold) 90%, transparent);
+      opacity: 0.3;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      position: relative;
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .timeline-item.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -33px;
+      top: 1.8rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--burgundy-deep);
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 15px rgba(201, 169, 78, 0.3);
+      transition: all 0.4s ease;
+    }
+
+    .timeline-item.revealed .timeline-dot {
+      background: var(--gold);
+      box-shadow: 0 0 25px rgba(201, 169, 78, 0.5);
+    }
+
+    .timeline-time {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      color: var(--gold);
+      min-width: 70px;
+      padding-top: 0.1rem;
+    }
+
+    .timeline-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--gold-pale);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-content p {
+      font-size: clamp(0.8rem, 1.4vw, 0.9rem);
+      color: var(--rose);
+      font-weight: 200;
+      line-height: 1.6;
+    }
+
+    .timeline-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      opacity: 0.5;
+      margin-top: 0.15rem;
+    }
+
+    .timeline-icon svg { width: 100%; height: 100%; }
+
+    /* ─── DETAILS STRIP ─── */
+    .details-section {
+      text-align: center;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .detail-card {
+      padding: 2rem 1.5rem;
+      background: linear-gradient(135deg, rgba(107, 19, 49, 0.03), rgba(201, 169, 78, 0.03));
+      border: 1px solid rgba(201, 169, 78, 0.15);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .detail-card .card-icon {
+      width: 36px;
+      height: 36px;
+      margin: 0 auto 1rem;
+      opacity: 0.6;
+    }
+
+    .detail-card .card-icon svg { width: 100%; height: 100%; }
+
+    .detail-card h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .detail-card p {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+      color: var(--burgundy-deep);
+    }
+
+    /* ─── QUOTE SECTION ─── */
+    .quote-section {
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(107, 19, 49, 0.04) 0%, transparent 70%),
+        var(--cream);
+      padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      font-style: italic;
+      color: var(--burgundy);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.8;
+      position: relative;
+    }
+
+    .quote-text::before {
+      content: '\201C';
+      font-family: 'Great Vibes', cursive;
+      font-size: 4em;
+      color: var(--gold);
+      opacity: 0.3;
+      position: absolute;
+      top: -0.5em;
+      left: -0.3em;
+      line-height: 1;
+    }
+
+    .quote-author {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 0.8rem;
+      color: var(--gold);
+      margin-top: 1.5rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* ─── RSVP SECTION ─── */
+    .rsvp-section {
+      background:
+        linear-gradient(135deg, var(--velvet) 0%, var(--burgundy-deep) 50%, var(--noir) 100%);
+      max-width: 100%;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1.5rem, 5vw, 4rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .rsvp-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(201, 169, 78, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 70% 80%, rgba(201, 169, 78, 0.05) 0%, transparent 40%);
+    }
+
+    .rsvp-section .section-title {
+      color: var(--gold-pale);
+    }
+
+    .rsvp-section .section-subtitle {
+      color: var(--gold);
+      opacity: 0.6;
+    }
+
+    .rsvp-section .divider {
+      background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+    }
+
+    .rsvp-inner {
+      max-width: 500px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.6rem;
+    }
+
+    .form-group input[type="text"] {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(201, 169, 78, 0.2);
+      border-radius: 2px;
+      color: var(--gold-pale);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input[type="text"]::placeholder {
+      color: rgba(201, 169, 78, 0.3);
+    }
+
+    .form-group input[type="text"]:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 15px rgba(201, 169, 78, 0.1);
+    }
+
+    /* Radio buttons */
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .radio-option {
+      flex: 1;
+      position: relative;
+    }
+
+    .radio-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .radio-option label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.8rem;
+      border: 1px solid rgba(201, 169, 78, 0.2);
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: var(--gold-pale);
+      letter-spacing: 0.1em;
+      transition: all 0.3s;
+      text-transform: none;
+    }
+
+    .radio-option input:checked + label {
+      background: rgba(201, 169, 78, 0.15);
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 20px rgba(201, 169, 78, 0.1);
+    }
+
+    /* Guest stepper */
+    .guest-stepper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .stepper-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid rgba(201, 169, 78, 0.3);
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--gold);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .stepper-btn:hover {
+      background: rgba(201, 169, 78, 0.1);
+      border-color: var(--gold);
+    }
+
+    .guest-count {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--gold-pale);
+      min-width: 40px;
+      text-align: center;
+    }
+
+    /* Checkboxes */
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.6rem;
+    }
+
+    .checkbox-option {
+      position: relative;
+    }
+
+    .checkbox-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .checkbox-option label {
+      display: block;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid rgba(201, 169, 78, 0.15);
+      border-radius: 2px;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 0.8rem;
+      color: var(--gold-pale);
+      transition: all 0.3s;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .checkbox-option input:checked + label {
+      background: rgba(201, 169, 78, 0.1);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Conditional fields */
+    .conditional-fields {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease-out;
+    }
+
+    .conditional-fields.visible {
+      max-height: 600px;
+    }
+
+    /* Submit */
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      margin-top: 1rem;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      border: none;
+      border-radius: 2px;
+      color: var(--burgundy-deep);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 0.8rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+      transform: translateX(-100%);
+      transition: transform 0.6s;
+    }
+
+    .submit-btn:hover::before {
+      transform: translateX(100%);
+    }
+
+    .submit-btn:hover {
+      box-shadow: 0 4px 25px rgba(201, 169, 78, 0.3);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .submit-btn:disabled:hover::before {
+      transform: translateX(-100%);
+    }
+
+    /* Success state */
+    .rsvp-success {
+      display: none;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    .rsvp-success.visible {
+      display: block;
+    }
+
+    .rsvp-success h3 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .rsvp-success p {
+      color: var(--gold-pale);
+      font-weight: 200;
+      font-size: 0.95rem;
+      opacity: 0.7;
+    }
+
+    .rsvp-form.hidden {
+      display: none;
+    }
+
+    /* ─── FLOATING MASKS (decorative) ─── */
+    .floating-mask {
+      position: fixed;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 50;
+      transition: opacity 0.8s ease;
+    }
+
+    .floating-mask.visible {
+      opacity: 0.04;
+    }
+
+    .floating-mask-1 {
+      top: 15%;
+      right: -20px;
+      width: 100px;
+      transform: rotate(15deg);
+    }
+
+    .floating-mask-2 {
+      bottom: 20%;
+      left: -15px;
+      width: 80px;
+      transform: rotate(-10deg) scaleX(-1);
+    }
+
+    /* ─── GOLD PARTICLES ─── */
+    .particles-container {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 90;
+      overflow: hidden;
+    }
+
+    .gold-particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0;
+      animation: particleFall linear infinite;
+    }
+
+    @keyframes particleFall {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px) rotate(0deg);
+      }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(720deg);
+      }
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--burgundy-deep);
+    }
+
+    footer p {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 200;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      color: rgba(201, 169, 78, 0.3);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      .schedule-timeline { padding-left: 30px; }
+      .schedule-timeline::before { left: 10px; }
+      .timeline-dot { left: -27px; }
+      .timeline-icon { display: none; }
+      .checkbox-group { grid-template-columns: 1fr; }
+      .frame-corner { width: 40px; height: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ CURTAIN REVEAL ═══ -->
+  <div class="curtain-overlay" id="curtain">
+    <div class="curtain-left"></div>
+    <div class="curtain-right"></div>
+  </div>
+  <div class="curtain-monogram" id="monogram">I & C</div>
+
+  <!-- ═══ GOLD PARTICLES ═══ -->
+  <div class="particles-container" id="particles"></div>
+
+  <!-- ═══ BAROQUE FRAME ═══ -->
+  <div class="baroque-frame">
+    <div class="frame-corner tl">
+      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 58 C2 30, 2 2, 2 2 L58 2" stroke="rgba(201,169,78,0.4)" stroke-width="1" fill="none"/>
+        <path d="M2 2 Q15 2, 20 8 Q25 14, 22 22 Q19 30, 10 28 Q2 26, 2 18" stroke="rgba(201,169,78,0.3)" stroke-width="0.8" fill="none"/>
+        <circle cx="2" cy="2" r="2" fill="rgba(201,169,78,0.5)"/>
+        <path d="M8 2 C12 6, 14 12, 10 16 C6 20, 2 16, 4 12" stroke="rgba(201,169,78,0.2)" stroke-width="0.6" fill="none"/>
+      </svg>
+    </div>
+    <div class="frame-corner tr">
+      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 58 C2 30, 2 2, 2 2 L58 2" stroke="rgba(201,169,78,0.4)" stroke-width="1" fill="none"/>
+        <path d="M2 2 Q15 2, 20 8 Q25 14, 22 22 Q19 30, 10 28 Q2 26, 2 18" stroke="rgba(201,169,78,0.3)" stroke-width="0.8" fill="none"/>
+        <circle cx="2" cy="2" r="2" fill="rgba(201,169,78,0.5)"/>
+        <path d="M8 2 C12 6, 14 12, 10 16 C6 20, 2 16, 4 12" stroke="rgba(201,169,78,0.2)" stroke-width="0.6" fill="none"/>
+      </svg>
+    </div>
+    <div class="frame-corner bl">
+      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 58 C2 30, 2 2, 2 2 L58 2" stroke="rgba(201,169,78,0.4)" stroke-width="1" fill="none"/>
+        <path d="M2 2 Q15 2, 20 8 Q25 14, 22 22 Q19 30, 10 28 Q2 26, 2 18" stroke="rgba(201,169,78,0.3)" stroke-width="0.8" fill="none"/>
+        <circle cx="2" cy="2" r="2" fill="rgba(201,169,78,0.5)"/>
+        <path d="M8 2 C12 6, 14 12, 10 16 C6 20, 2 16, 4 12" stroke="rgba(201,169,78,0.2)" stroke-width="0.6" fill="none"/>
+      </svg>
+    </div>
+    <div class="frame-corner br">
+      <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 58 C2 30, 2 2, 2 2 L58 2" stroke="rgba(201,169,78,0.4)" stroke-width="1" fill="none"/>
+        <path d="M2 2 Q15 2, 20 8 Q25 14, 22 22 Q19 30, 10 28 Q2 26, 2 18" stroke="rgba(201,169,78,0.3)" stroke-width="0.8" fill="none"/>
+        <circle cx="2" cy="2" r="2" fill="rgba(201,169,78,0.5)"/>
+        <path d="M8 2 C12 6, 14 12, 10 16 C6 20, 2 16, 4 12" stroke="rgba(201,169,78,0.2)" stroke-width="0.6" fill="none"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ═══ FLOATING DECORATIVE MASKS ═══ -->
+  <div class="floating-mask floating-mask-1" id="floatMask1">
+    <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 10 C60 10, 10 30, 10 55 C10 75, 40 90, 60 85 C70 82, 75 70, 80 65 C85 60, 95 58, 100 58 C105 58, 115 60, 120 65 C125 70, 130 82, 140 85 C160 90, 190 75, 190 55 C190 30, 140 10, 100 10Z" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+      <ellipse cx="65" cy="48" rx="22" ry="16" stroke="var(--gold)" stroke-width="1" fill="none"/>
+      <ellipse cx="135" cy="48" rx="22" ry="16" stroke="var(--gold)" stroke-width="1" fill="none"/>
+      <path d="M90 72 Q100 82, 110 72" stroke="var(--gold)" stroke-width="1" fill="none"/>
+      <path d="M10 55 Q5 45, 2 35" stroke="var(--gold)" stroke-width="1" fill="none"/>
+      <path d="M190 55 Q195 45, 198 35" stroke="var(--gold)" stroke-width="1" fill="none"/>
+      <circle cx="100" cy="25" r="2" fill="var(--gold)" opacity="0.5"/>
+      <path d="M85 20 Q100 12, 115 20" stroke="var(--gold)" stroke-width="0.8" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="floating-mask floating-mask-2" id="floatMask2">
+    <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 10 C60 10, 10 30, 10 55 C10 75, 40 90, 60 85 C70 82, 75 70, 80 65 C85 60, 95 58, 100 58 C105 58, 115 60, 120 65 C125 70, 130 82, 140 85 C160 90, 190 75, 190 55 C190 30, 140 10, 100 10Z" stroke="var(--gold)" stroke-width="1.5" fill="none"/>
+      <ellipse cx="65" cy="48" rx="22" ry="16" stroke="var(--gold)" stroke-width="1" fill="none"/>
+      <ellipse cx="135" cy="48" rx="22" ry="16" stroke="var(--gold)" stroke-width="1" fill="none"/>
+      <path d="M90 72 Q100 82, 110 72" stroke="var(--gold)" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <!-- Background mask watermark -->
+    <div class="hero-mask">
+      <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 10 C60 10, 10 30, 10 55 C10 75, 40 90, 60 85 C70 82, 75 70, 80 65 C85 60, 95 58, 100 58 C105 58, 115 60, 120 65 C125 70, 130 82, 140 85 C160 90, 190 75, 190 55 C190 30, 140 10, 100 10Z" stroke="var(--burgundy)" stroke-width="2" fill="none"/>
+        <ellipse cx="65" cy="48" rx="22" ry="16" stroke="var(--burgundy)" stroke-width="1.5" fill="none"/>
+        <ellipse cx="135" cy="48" rx="22" ry="16" stroke="var(--burgundy)" stroke-width="1.5" fill="none"/>
+        <path d="M90 72 Q100 82, 110 72" stroke="var(--burgundy)" stroke-width="1.5" fill="none"/>
+        <path d="M10 55 Q5 45, 2 35 Q0 28, 3 22" stroke="var(--burgundy)" stroke-width="1" fill="none"/>
+        <path d="M190 55 Q195 45, 198 35 Q200 28, 197 22" stroke="var(--burgundy)" stroke-width="1" fill="none"/>
+        <path d="M40 15 Q60 5, 80 12" stroke="var(--burgundy)" stroke-width="0.8" fill="none"/>
+        <path d="M120 12 Q140 5, 160 15" stroke="var(--burgundy)" stroke-width="0.8" fill="none"/>
+        <circle cx="100" cy="18" r="3" fill="var(--burgundy)" opacity="0.3"/>
+        <path d="M85 14 Q100 6, 115 14" stroke="var(--burgundy)" stroke-width="1" fill="none"/>
+        <path d="M92 10 Q100 3, 108 10" stroke="var(--burgundy)" stroke-width="0.6" fill="none"/>
+      </svg>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-subtitle">Vă invităm la nunta noastră</p>
+
+      <div class="hero-ornament">
+        <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="10" x2="70" y2="10" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/>
+          <path d="M75 10 Q85 2, 100 10 Q115 18, 125 10" stroke="var(--gold)" stroke-width="0.8" fill="none" opacity="0.5"/>
+          <circle cx="100" cy="10" r="2" fill="var(--gold)" opacity="0.4"/>
+          <line x1="130" y1="10" x2="200" y2="10" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <h1 class="hero-names">
+        Irina <span class="amp">&</span> Cătălin
+      </h1>
+
+      <div class="hero-ornament">
+        <svg viewBox="0 0 200 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="10" x2="70" y2="10" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/>
+          <path d="M75 10 Q85 18, 100 10 Q115 2, 125 10" stroke="var(--gold)" stroke-width="0.8" fill="none" opacity="0.5"/>
+          <circle cx="100" cy="10" r="2" fill="var(--gold)" opacity="0.4"/>
+          <line x1="130" y1="10" x2="200" y2="10" stroke="var(--gold)" stroke-width="0.5" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <p class="hero-date">12 Septembrie 2026</p>
+      <p class="hero-location">București, România</p>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Descoperă</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- ═══ INVITATION TEXT ═══ -->
+  <section class="invitation-section">
+    <div class="reveal">
+      <p class="section-subtitle">Un bal al destinului</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="reveal reveal-delay-1">
+      <p class="invitation-text">
+        Cu bucurie în suflet, vă invităm să ne fiți alături într-o seară de <span class="highlight">poveste</span>,
+        unde măștile cad și rămâne doar iubirea. Celebrăm împreună începutul unui capitol nou,
+        scris cu aurul promisiunilor și catifeaua visurilor împărtășite.
+      </p>
+    </div>
+
+    <div class="reveal reveal-delay-2">
+      <div class="mask-divider">
+        <svg viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="20" x2="60" y2="20" stroke="var(--gold)" stroke-width="0.5"/>
+          <path d="M65 20 C75 10, 85 12, 90 15 C95 18, 95 22, 100 20 C105 18, 105 22, 110 25 C115 28, 125 30, 135 20" stroke="var(--gold)" stroke-width="0.8" fill="none"/>
+          <circle cx="100" cy="20" r="3" stroke="var(--gold)" stroke-width="0.6" fill="none"/>
+          <line x1="140" y1="20" x2="200" y2="20" stroke="var(--gold)" stroke-width="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SCHEDULE ═══ -->
+  <div class="schedule-section">
+    <div class="schedule-inner">
+      <div class="reveal">
+        <h2 class="section-title">Programul Serii</h2>
+        <p class="section-subtitle">Actele spectacolului nostru</p>
+        <div class="divider"></div>
+      </div>
+
+      <div class="schedule-timeline">
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">16:00</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="timeline-content">
+            <h3>Ceremonia Religioasă</h3>
+            <p>Ridicarea cortinei — momentul în care totul începe</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">17:30</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2">
+              <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/>
+            </svg>
+          </div>
+          <div class="timeline-content">
+            <h3>Cocktail &amp; Recepție</h3>
+            <p>Primul act — muzică, voie bună și brânzeturi fine</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">19:00</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2">
+              <path d="M12 15a3 3 0 100-6 3 3 0 000 6z"/>
+              <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>
+            </svg>
+          </div>
+          <div class="timeline-content">
+            <h3>Cina Festivă</h3>
+            <p>Actul principal — un ospăț demn de Veneția</p>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-reveal>
+          <div class="timeline-dot"></div>
+          <div class="timeline-time">21:00</div>
+          <div class="timeline-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2">
+              <circle cx="5.5" cy="17.5" r="2.5"/>
+              <circle cx="17.5" cy="15.5" r="2.5"/>
+              <path d="M8 17V5l12-2v10"/>
+            </svg>
+          </div>
+          <div class="timeline-content">
+            <h3>Dansul &amp; Petrecerea</h3>
+            <p>Marele final — muzică, dans și surprize până la răsărit</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DETAILS ═══ -->
+  <section class="details-section">
+    <div class="reveal">
+      <h2 class="section-title">Detalii</h2>
+      <p class="section-subtitle">Tot ce trebuie să știți</p>
+      <div class="divider"></div>
+    </div>
+
+    <div class="details-grid">
+      <div class="detail-card reveal reveal-delay-1">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+            <text x="12" y="18" text-anchor="middle" fill="var(--gold)" font-size="7" font-family="Playfair Display" stroke="none">12</text>
+          </svg>
+        </div>
+        <h4>Data</h4>
+        <p>12 Septembrie 2026</p>
+      </div>
+
+      <div class="detail-card reveal reveal-delay-2">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <h4>Locația</h4>
+        <p>București, România</p>
+      </div>
+
+      <div class="detail-card reveal reveal-delay-3">
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.2">
+            <path d="M12 2C8 2 4 5 4 9c0 3 2 5 4 6l4 7 4-7c2-1 4-3 4-6 0-4-4-7-8-7z" stroke="none" fill="none"/>
+            <path d="M6 3L3 6M18 3l3 3M12 2v4M8 8l-2 2M16 8l2 2"/>
+            <path d="M7 13h10M9 17h6"/>
+            <circle cx="12" cy="8" r="4"/>
+          </svg>
+        </div>
+        <h4>Dress Code</h4>
+        <p>Black Tie / Elegant</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ QUOTE ═══ -->
+  <section class="quote-section">
+    <div class="reveal">
+      <blockquote class="quote-text">
+        Viața este un bal mascat; cel care nu își pune masca este cel mai sincer dansator.
+      </blockquote>
+      <p class="quote-author">— Inspirat de Oscar Wilde</p>
+    </div>
+  </section>
+
+  <!-- ═══ RSVP ═══ -->
+  <div class="rsvp-section">
+    <div class="rsvp-inner">
+      <div class="reveal">
+        <h2 class="section-title">Confirmă Prezența</h2>
+        <p class="section-subtitle">Ne bucurăm să vă avem alături</p>
+        <div class="divider"></div>
+      </div>
+
+      <form class="rsvp-form reveal" id="rsvpForm">
+        <div class="form-group">
+          <label>Numele complet</label>
+          <input type="text" id="guestName" placeholder="Prenume și Nume" autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+          <label>Veți participa?</label>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" name="attending" id="attendYes" value="yes" />
+              <label for="attendYes">Cu drag, da</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="attending" id="attendNo" value="no" />
+              <label for="attendNo">Din păcate, nu</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="conditional-fields" id="conditionalFields">
+          <div class="form-group">
+            <label>Număr de persoane</label>
+            <div class="guest-stepper">
+              <button type="button" class="stepper-btn" id="guestMinus">−</button>
+              <span class="guest-count" id="guestCountDisplay">1</span>
+              <button type="button" class="stepper-btn" id="guestPlus">+</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Preferințe alimentare</label>
+            <div class="checkbox-group">
+              <div class="checkbox-option">
+                <input type="checkbox" id="dietNone" value="none" checked />
+                <label for="dietNone">Fără restricții</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="dietVegetarian" value="vegetarian" />
+                <label for="dietVegetarian">Vegetarian</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="dietVegan" value="vegan" />
+                <label for="dietVegan">Vegan</label>
+              </div>
+              <div class="checkbox-option">
+                <input type="checkbox" id="dietGlutenFree" value="gluten-free" />
+                <label for="dietGlutenFree">Fără gluten</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Sugestie melodie</label>
+            <input type="text" id="songRequest" placeholder="Melodia care te scoate la dans..." />
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn" disabled>Trimite Confirmarea</button>
+      </form>
+
+      <div class="rsvp-success" id="rsvpSuccess">
+        <h3>Mulțumim!</h3>
+        <p>Confirmarea ta a fost înregistrată. Ne vedem la bal!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <p>Irina & Cătălin — 2026</p>
+  </footer>
+
+  <script>
+    // ─── CURTAIN ANIMATION ───
+    const curtain = document.getElementById('curtain');
+    setTimeout(() => {
+      curtain.classList.add('opened');
+    }, 3500);
+
+    // ─── GOLD PARTICLES ───
+    const particlesContainer = document.getElementById('particles');
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'gold-particle';
+      const size = Math.random() * 3 + 1;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = '-10px';
+      particle.style.animationDuration = (Math.random() * 6 + 8) + 's';
+      particle.style.animationDelay = Math.random() * 2 + 's';
+      particlesContainer.appendChild(particle);
+
+      setTimeout(() => {
+        particle.remove();
+      }, 16000);
+    }
+
+    // Start particles after curtain opens
+    setTimeout(() => {
+      setInterval(createParticle, 800);
+    }, 3500);
+
+    // ─── FLOATING MASKS ───
+    const floatMask1 = document.getElementById('floatMask1');
+    const floatMask2 = document.getElementById('floatMask2');
+
+    setTimeout(() => {
+      floatMask1.classList.add('visible');
+      floatMask2.classList.add('visible');
+    }, 4000);
+
+    // ─── SCROLL REVEAL ───
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.reveal, [data-reveal]').forEach(el => {
+      revealObserver.observe(el);
+    });
+
+    // ─── TIMELINE ITEMS ───
+    const timelineObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.timeline-item').forEach((item, index) => {
+      item.style.transitionDelay = (index * 0.2) + 's';
+      timelineObserver.observe(item);
+    });
+
+    // ─── RSVP FORM ───
+    const form = document.getElementById('rsvpForm');
+    const nameInput = document.getElementById('guestName');
+    const attendYes = document.getElementById('attendYes');
+    const attendNo = document.getElementById('attendNo');
+    const conditionalFields = document.getElementById('conditionalFields');
+    const submitBtn = document.getElementById('submitBtn');
+    const rsvpSuccess = document.getElementById('rsvpSuccess');
+
+    let guestCount = 1;
+    const guestCountDisplay = document.getElementById('guestCountDisplay');
+    const guestMinus = document.getElementById('guestMinus');
+    const guestPlus = document.getElementById('guestPlus');
+
+    function updateSubmitState() {
+      const nameValid = nameInput.value.trim().length > 0;
+      const attendSelected = attendYes.checked || attendNo.checked;
+      submitBtn.disabled = !(nameValid && attendSelected);
+    }
+
+    nameInput.addEventListener('input', updateSubmitState);
+
+    [attendYes, attendNo].forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (attendYes.checked) {
+          conditionalFields.classList.add('visible');
+        } else {
+          conditionalFields.classList.remove('visible');
+        }
+        updateSubmitState();
+      });
+    });
+
+    guestMinus.addEventListener('click', () => {
+      if (guestCount > 1) {
+        guestCount--;
+        guestCountDisplay.textContent = guestCount;
+      }
+    });
+
+    guestPlus.addEventListener('click', () => {
+      if (guestCount < 20) {
+        guestCount++;
+        guestCountDisplay.textContent = guestCount;
+      }
+    });
+
+    // Dietary checkboxes logic
+    const dietNone = document.getElementById('dietNone');
+    const otherDiets = document.querySelectorAll('#dietVegetarian, #dietVegan, #dietGlutenFree');
+
+    dietNone.addEventListener('change', () => {
+      if (dietNone.checked) {
+        otherDiets.forEach(cb => cb.checked = false);
+      }
+    });
+
+    otherDiets.forEach(cb => {
+      cb.addEventListener('change', () => {
+        if (cb.checked) {
+          dietNone.checked = false;
+        }
+        const anyOther = [...otherDiets].some(c => c.checked);
+        if (!anyOther) {
+          dietNone.checked = true;
+        }
+      });
+    });
+
+    // Form submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: nameInput.value.trim(),
+        attending: attendYes.checked ? 'yes' : 'no',
+        guests: guestCount,
+        dietary: [...document.querySelectorAll('.checkbox-option input:checked')].map(c => c.value).join(', '),
+        song: document.getElementById('songRequest').value.trim()
+      };
+
+      // ─── Google Sheets integration (uncomment and set SHEET_URL) ───
+      // const SHEET_URL = '';
+      // try {
+      //   await fetch(SHEET_URL, {
+      //     method: 'POST',
+      //     mode: 'no-cors',
+      //     headers: { 'Content-Type': 'application/json' },
+      //     body: JSON.stringify(data)
+      //   });
+      // } catch (err) {
+      //   console.error('Submit error:', err);
+      // }
+
+      form.classList.add('hidden');
+      rsvpSuccess.classList.add('visible');
+    });
+  </script>
+</body>
+</html>
